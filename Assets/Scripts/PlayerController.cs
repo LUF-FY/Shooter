@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 _moveVector = Vector3.zero;
-    private float _fallVelocity = 1;
+    private float _fallVelocity = 10;
     private CharacterController _characterController;
     // Start is called before the first frame update
     void Start()
