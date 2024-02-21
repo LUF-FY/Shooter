@@ -8,42 +8,60 @@ public class PlayerController : MonoBehaviour
     public float JumpForce;
     public float Speed;
 
+    public Animator PlayerAnimator;
 
     private Vector3 _moveVector = Vector3.zero;
     private float _fallVelocity = 10;
     private CharacterController _characterController;
+
+
     // Start is called before the first frame update
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        Debug.Log(_moveVector);
+
+        //Debug.Log(_moveVector);
     }
 
     void Update()
     {
         _moveVector = Vector3.zero;
+
+        // (0, 0, 0)
+
         if (Input.GetKey(KeyCode.W))
         {
-            _moveVector += Vector3.forward;
+            _moveVector += transform.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            _moveVector -= Vector3.forward;
+            _moveVector -= transform.forward;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _moveVector += Vector3.right;
+            _moveVector += transform.right;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            _moveVector -= Vector3.right;
+            _moveVector -= transform.right;
+        }
+
+        if(_moveVector != Vector3.zero)
+        {
+            PlayerAnimator.SetBool("isRun", true);
+        }
+        else
+        {
+            PlayerAnimator.SetBool("isRun", false);
         }
 
         if (_characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             _fallVelocity = -JumpForce;
+            PlayerAnimator.SetTrigger("jump");
         }
-        Debug.Log(_moveVector);
+
+        //Debug.Log(_moveVector);
     }
 
     // Update is called once per frame
