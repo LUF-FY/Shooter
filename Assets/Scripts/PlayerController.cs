@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public Animator PlayerAnimator;
 
     private Vector3 _moveVector = Vector3.zero;
-    private float _fallVelocity = 10;
+    private float _fallVelocity = 1;
     private CharacterController _characterController;
 
 
