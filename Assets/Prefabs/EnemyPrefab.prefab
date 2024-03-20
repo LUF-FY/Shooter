@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1681907770533794215}
   - component: {fileID: 1681907770533794211}
   - component: {fileID: 1681907770533794210}
+  - component: {fileID: 4984799952184667920}
   m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Untagged
@@ -121,6 +122,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4984799952184667920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681907770533794200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd53de0b5ddcbe4fa7df0b7513ac148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
 --- !u!1001 &1681907771146922586
 PrefabInstance:
   m_ObjectHideFlags: 0
