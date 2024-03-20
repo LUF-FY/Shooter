@@ -22,15 +22,12 @@ public class Enemy_W6 : MonoBehaviour
 
     void Update()
     {
-        if (_navMeshAgent.pathPending)
-        {
-            return;
-        }
         if (CheckPlayer())
         {
             _navMeshAgent.SetDestination(Player.position);
-            if (Vector3.Distance(transform.position, Player.position) <= MinDetectDistance)
+            if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
             {
+                Debug.Log("Player in range");
                 _playerHealth.TakeDamage(Damage * Time.deltaTime);
             }
         }

@@ -9,10 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject PlayerUI;
     public GameObject GameOverUI;
 
-    public GameObject HealEffect;
-
     float _currentValue;
-    
 
     void Start()
     {
@@ -28,17 +25,6 @@ public class PlayerHealth : MonoBehaviour
             _currentValue = 0;
             GameOver();
         }
-        UpdateHealthbar();
-    }
-
-    public void AddHealth(float amount)
-    {
-        _currentValue += amount;
-        if (_currentValue > MaxValue)
-        {
-            _currentValue = MaxValue;
-        }
-        HealEffect.GetComponent<ParticleSystem>().Play();
         UpdateHealthbar();
     }
 

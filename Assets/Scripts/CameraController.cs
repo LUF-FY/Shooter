@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         //Откоментировать для блокировки курсора в центре экрана
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
         float newAngleY = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * RotationSpeed;
         transform.localEulerAngles = new Vector3(0, newAngleY, 0);
 
-
+        
         float newAngleX = CameraHolder.localEulerAngles.x - Input.GetAxis("Mouse Y") * RotationSpeed;
         if (newAngleX > 180)
         {
