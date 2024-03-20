@@ -6,7 +6,10 @@ public class Player : MonoBehaviour
     public float gravity = 9.8f;
     public float jumpForce;
     public float speed;
+    public float sprintPower;
 
+    bool isDoubleJumpAllowed = false;
+    bool isSprinting = false;
     Vector3 _moveVector;
     float _fallVelocity = 0;
 
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
         _moveVector = Vector3.zero;
         animator.SetFloat("speed", 0);
 
@@ -43,16 +47,42 @@ public class Player : MonoBehaviour
             _moveVector -= transform.right;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            _fallVelocity = -jumpForce;
-            animator.SetBool("isGrounded", false);
+            animator.speed = sprintPower;
+            isSprinting = true;
+        }
+        else
+        {
+            animator.speed = 1;
+            isSprinting = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_characterController.isGrounded)
+            {
+                isDoubleJumpAllowed = true;
+                _fallVelocity = -jumpForce;
+                animator.SetBool("isGrounded", false);
+            }
+            else if (isDoubleJumpAllowed)
+            {
+                _fallVelocity = -jumpForce;
+                isDoubleJumpAllowed = false;
+            }
         }
     }
 
     void FixedUpdate()
     {
-        _characterController.Move(_moveVector * speed * Time.fixedDeltaTime);
+        var moveVector = _moveVector * speed * Time.fixedDeltaTime;
+        if (isSprinting)
+        {
+            moveVector *= sprintPower;
+        }
+        _characterController.Move(moveVector);
+
 
         _fallVelocity += gravity * Time.fixedDeltaTime;
         _characterController.Move(Vector3.down * _fallVelocity * Time.fixedDeltaTime);
