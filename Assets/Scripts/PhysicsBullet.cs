@@ -3,6 +3,7 @@
 public class PhysicsBullet : MonoBehaviour
 {
     [SerializeField] float _speed = 50;
+    [SerializeField] float damage = 10;
     void Start()
     {
         Destroy(gameObject, 5);
@@ -11,9 +12,10 @@ public class PhysicsBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Enemy_W6>() != null)
+        var enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        if (enemy != null)
         {
-            Destroy(collision.gameObject);
+            enemy.TakeDamage(damage);
         }
         Destroy(gameObject);
     }

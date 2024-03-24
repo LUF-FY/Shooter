@@ -2,20 +2,24 @@
 
 public class PhysicsWeapon : MonoBehaviour
 {
-    [SerializeField] PhysicsBullet bulletPrefab;
+    [SerializeField] private PhysicsBullet bulletPrefab;
+    [SerializeField] private GameObject fireBallSource;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("FireMouse");
+            //GetComponentInParent<Animator>().SetTrigger("Attack");
             FireBullet();
         }
     }
 
-    void FireBullet()
+    public void FireBullet()
     {
         PhysicsBullet bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
         bullet.transform.LookAt(GetTargetPoint());
+        Debug.Log("Fire");
     }
 
     Vector3 GetTargetPoint()
